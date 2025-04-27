@@ -1,0 +1,342 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["chunk-56fb5063"], {
+    3528: function (t, e, n) {
+        "use strict";
+        n.d(e, "b", function () {
+            return r;
+        }), n.d(e, "a", function () {
+            return l;
+        }), n.d(e, "c", function () {
+            return i;
+        });
+        var a = n("b775");
+
+        function r() {
+            var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { pageNum: 1, pageSize: 999999, search: "" };
+            return Object(a["a"])({ url: "role/list", params: t });
+        }
+
+        function l(t) {
+            return Object(a["a"])({ url: "role/del/" + t, method: "delete" });
+        }
+
+        function i(t) {
+            return Object(a["a"])({ url: "role/save", method: "post", data: t });
+        }
+    },
+    "70eb": function (t, e, n) {
+        "use strict";
+        n.r(e);
+        var a = function () {
+                var t = this,
+                    e = t.$createElement,
+                    n = t._self._c || e;
+                return n("div", { staticClass: "app-container" }, [
+                    n("el-dialog", {
+                        attrs: { title: "Save Information", visible: t.formVisible },
+                        on: { "update:visible": function (e) { t.formVisible = e; } }
+                    }, [
+                        n("el-form", { attrs: { model: t.form, "label-width": "100px" } }, [
+                            n("el-form-item", { attrs: { label: "Role Name" } }, [
+                                n("el-input", {
+                                    attrs: { placeholder: "Role Name" },
+                                    model: {
+                                        value: t.form.name,
+                                        callback: function (e) { t.$set(t.form, "name", e); },
+                                        expression: "form.name"
+                                    }
+                                })
+                            ], 1),
+                            n("el-form-item", { attrs: { label: "Role Description" } }, [
+                                n("el-input", {
+                                    attrs: { placeholder: "Role Description" },
+                                    model: {
+                                        value: t.form.description,
+                                        callback: function (e) { t.$set(t.form, "description", e); },
+                                        expression: "form.description"
+                                    }
+                                })
+                            ], 1),
+                            n("el-form-item", [n("el-button", {
+                                attrs: { type: "primary" },
+                                on: { click: t.handleSubmit }
+                            }, [t._v("Submit Information")])], 1)
+                        ], 1)
+                    ], 1),
+                    n("el-dialog", {
+                        attrs: { title: "Role Permissions", visible: t.allotVisible },
+                        on: { "update:visible": function (e) { t.allotVisible = e; } }
+                    }, [
+                        n("el-form", { attrs: { model: t.allotForm, "label-width": "100px" } }, [
+                            n("el-form-item", { attrs: { label: "Assign Permissions" } }, [
+                                n("el-select", {
+                                    staticStyle: { width: "100%" },
+                                    attrs: { multiple: "", placeholder: "Please select permissions" },
+                                    model: {
+                                        value: t.allotForm.permissionIds,
+                                        callback: function (e) { t.$set(t.allotForm, "permissionIds", e); },
+                                        expression: "allotForm.permissionIds"
+                                    }
+                                }, t._l(t.permissionList, function (t) {
+                                    return n("el-option", { key: t.id, attrs: { label: t.description, value: t.id } });
+                                }), 1)
+                            ], 1),
+                            n("el-form-item", [n("el-button", {
+                                attrs: { type: "primary" },
+                                on: { click: t.handleSubmitAllot }
+                            }, [t._v("Confirm Assignment")])], 1)
+                        ], 1)
+                    ], 1),
+                    t.allotMenusVisible ? n("el-dialog", {
+                        attrs: { title: "Role Menus", visible: t.allotMenusVisible },
+                        on: { "update:visible": function (e) { t.allotMenusVisible = e; } }
+                    }, [
+                        n("el-form", { attrs: { model: t.allotMenuForm, "label-width": "100px" } }, [
+                            n("el-form-item", { attrs: { label: "Assign Menus" } }, [
+                                n("el-tree", {
+                                    ref: "menusTree",
+                                    attrs: {
+                                        "check-strictly": !0,
+                                        data: t.treeMenus,
+                                        "show-checkbox": "",
+                                        props: { label: "name" },
+                                        "node-key": "id",
+                                        "default-expand-all": "",
+                                        "default-checked-keys": t.allotMenuForm.menuIds
+                                    }
+                                })
+                            ], 1),
+                            n("el-form-item", [n("el-button", {
+                                attrs: { type: "primary" },
+                                on: { click: t.handleSubmitAllotMenu }
+                            }, [t._v("Confirm Assignment")])], 1)
+                        ], 1)
+                    ], 1) : t._e(),
+                    n("el-form", { attrs: { inline: !0, size: "small" } }, [
+                        n("el-form-item", { attrs: { label: "Search:" } }, [
+                            n("el-input", {
+                                model: {
+                                    value: t.searchParams.search,
+                                    callback: function (e) { t.$set(t.searchParams, "search", e); },
+                                    expression: "searchParams.search"
+                                }
+                            })
+                        ], 1),
+                        n("el-form-item", [n("el-button", {
+                            attrs: { type: "primary" },
+                            on: { click: t.fetchData }
+                        }, [t._v("Search")])], 1),
+                        n("el-form-item", [n("el-button", {
+                            attrs: { type: "success" },
+                            on: { click: t.handleInsert }
+                        }, [t._v("Add Information")])], 1)
+                    ], 1),
+                    n("el-table", {
+                        directives: [{ name: "loading", rawName: "v-loading", value: t.listLoading, expression: "listLoading" }],
+                        attrs: { data: t.list, "element-loading-text": "Loading", border: "", fit: "", "highlight-current-row": "" }
+                    }, [
+                        n("el-table-column", { attrs: { align: "center", label: "ID" }, scopedSlots: t._u([{ key: "default", fn: function (e) { return [t._v(" " + t._s(e.row.id) + " ")]; } }]) }),
+                        n("el-table-column", { attrs: { align: "center", label: "Role Name" }, scopedSlots: t._u([{ key: "default", fn: function (e) { return [t._v(" " + t._s(e.row.name) + " ")]; } }]) }),
+                        n("el-table-column", { attrs: { align: "center", label: "Role Description" }, scopedSlots: t._u([{ key: "default", fn: function (e) { return [t._v(" " + t._s(e.row.description) + " ")]; } }]) }),
+                        n("el-table-column", { attrs: { align: "center", label: "Actions" }, scopedSlots: t._u([{ key: "default", fn: function (e) { return [
+                                    n("el-button", {
+                                        attrs: { type: "text", size: "mini" },
+                                        on: { click: function (n) { return t.handleUpdate(e.row); } }
+                                    }, [t._v("Edit")]),
+                                    n("el-button", {
+                                        attrs: { type: "text", size: "mini" },
+                                        on: { click: function (n) { return t.handleDelete(e.row); } }
+                                    }, [t._v("Delete")]),
+                                    n("el-button", {
+                                        attrs: { type: "text", size: "mini" },
+                                        on: { click: function (n) { return t.handleAllot(e.row); } }
+                                    }, [t._v("Assign Permissions")]),
+                                    n("el-button", {
+                                        attrs: { type: "text", size: "mini" },
+                                        on: { click: function (n) { return t.handleAllotMenu(e.row); } }
+                                    }, [t._v("Assign Menus")])
+                                ]; } }]) })
+                    ], 1),
+                    n("div", { style: { textAlign: "center", padding: "10px" } }, [
+                        n("el-pagination", {
+                            attrs: {
+                                background: "",
+                                layout: "prev, pager, next",
+                                total: t.searchParams.total,
+                                "current-page": t.searchParams.pageNum
+                            },
+                            on: {
+                                "update:currentPage": function (e) { return t.$set(t.searchParams, "pageNum", e); },
+                                "update:current-page": function (e) { return t.$set(t.searchParams, "pageNum", e); },
+                                "current-change": t.fetchData
+                            }
+                        })
+                    ], 1)
+                ], 1);
+            },
+            r = [],
+            l = n("5530"),
+            i = (n("d81d"), n("3528")),
+            o = n("c1b4"),
+            s = n("b775");
+
+        function c(t) {
+            return Object(s["a"])({ url: "/role/permission/list/" + t });
+        }
+
+        function u(t) {
+            var e = t.roleId,
+                n = t.permissionIds;
+            return Object(s["a"])({ url: "/role/permission/allot/" + e, method: "post", data: n });
+        }
+
+        var d = n("a6dc"),
+            m = {
+                filters: {
+                    statusFilter: function (t) {
+                        var e = { published: "success", draft: "gray", deleted: "danger" };
+                        return e[t];
+                    }
+                },
+                data: function () {
+                    return {
+                        list: null,
+                        listLoading: !0,
+                        formVisible: !1,
+                        form: {},
+                        allotForm: {},
+                        allotMenuForm: {},
+                        allotVisible: !1,
+                        allotMenusVisible: !1,
+                        permissionList: [],
+                        treeMenus: [],
+                        searchParams: { total: 0, pageNum: 1, pageSize: 10, search: "" }
+                    };
+                },
+                created: function () {
+                    var t = this;
+                    this.fetchData(), Object(o["b"])().then(function (e) {
+                        t.permissionList = e.data.records;
+                    }), Object(d["d"])().then(function (e) {
+                        t.treeMenus = e.data;
+                    });
+                },
+                methods: {
+                    handleSubmitAllotMenu: function () {
+                        var t = this;
+                        this.$confirm("Are you sure to assign menus to this role?", "Warning", { cancelButtonText: "Cancel", confirmButtonText: "Confirm" }).then(function () {
+                            var e = t.$refs.menusTree.getCheckedNodes().map(function (t) { return t.id; });
+                            Object(d["a"])({ roleId: t.allotMenuForm.roleId, menuIds: e }).then(function () {
+                                t.$message.success("Menus assigned successfully"), t.fetchData(), t.allotMenusVisible = !1;
+                            });
+                        });
+                    },
+                    handleSubmitAllot: function () {
+                        var t = this;
+                        this.$confirm("Are you sure to assign permissions to this role?", "Warning", { cancelButtonText: "Cancel", confirmButtonText: "Confirm" }).then(function () {
+                            u(t.allotForm).then(function () {
+                                t.$message.success("Permissions assigned successfully"), t.fetchData(), t.allotVisible = !1;
+                            });
+                        });
+                    },
+                    handleAllot: function (t) {
+                        var e = this;
+                        c(t.id).then(function (n) {
+                            var a = n.data;
+                            e.allotForm = { roleId: t.id, permissionIds: a }, e.allotVisible = !0;
+                        });
+                    },
+                    handleAllotMenu: function (t) {
+                        var e = this;
+                        Object(d["c"])(t.id).then(function (n) {
+                            var a = n.data;
+                            e.allotMenuForm = { roleId: t.id, menuIds: a }, e.allotMenusVisible = !0;
+                        });
+                    },
+                    handleUpdate: function (t) {
+                        this.form = Object(l["a"])({}, t), this.formVisible = !0;
+                    },
+                    handleInsert: function () {
+                        this.form = { role: parseInt(this.$route.params.role) }, this.formVisible = !0;
+                    },
+                    handleSubmit: function () {
+                        var t = this;
+                        Object(i["c"])(this.form).then(function () {
+                            t.$message.success("Information saved successfully"), t.fetchData(), t.formVisible = !1;
+                        });
+                    },
+                    handleDelete: function (t) {
+                        var e = this,
+                            n = t.id;
+                        this.$confirm("Are you sure to delete this information?", "Warning", { cancelButtonText: "Cancel", confirmButtonText: "Confirm" }).then(function () {
+                            Object(i["a"])(n).then(function () {
+                                e.$message.success("Deleted successfully"), e.fetchData();
+                            });
+                        });
+                    },
+                    fetchData: function () {
+                        var t = this;
+                        this.listLoading = !0, Object(i["b"])(this.searchParams).then(function (e) {
+                            var n = e.data,
+                                a = n.records,
+                                r = n.total;
+                            t.list = a, t.searchParams.total = r, t.listLoading = !1;
+                        });
+                    }
+                }
+            },
+            f = m,
+            h = n("2877"),
+            b = Object(h["a"])(f, a, r, !1, null, null, null);
+        e["default"] = b.exports;
+    },
+    a6dc: function (t, e, n) {
+        "use strict";
+        n.d(e, "d", function () { return r; }), n.d(e, "e", function () { return l; }), n.d(e, "b", function () { return i; }), n.d(e, "f", function () { return o; }), n.d(e, "c", function () { return s; }), n.d(e, "a", function () { return c; });
+        var a = n("b775");
+
+        function r() {
+            return Object(a["a"])({ url: "menu/tree", method: "get" });
+        }
+
+        function l() {
+            var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { pageNum: 1, pageSize: 999999, search: "" };
+            return Object(a["a"])({ url: "menu/list", params: t });
+        }
+
+        function i(t) {
+            return Object(a["a"])({ url: "menu/del/" + t, method: "delete" });
+        }
+
+        function o(t) {
+            return Object(a["a"])({ url: "menu/save", method: "post", data: t });
+        }
+
+        function s(t) {
+            return Object(a["a"])({ url: "role/menu/list/" + t, method: "get" });
+        }
+
+        function c(t) {
+            var e = t.roleId,
+                n = t.menuIds;
+            return Object(a["a"])({ url: "role/menu/allot/" + e, method: "post", data: n });
+        }
+    },
+    c1b4: function (t, e, n) {
+        "use strict";
+        n.d(e, "b", function () { return r; }), n.d(e, "a", function () { return l; }), n.d(e, "c", function () { return i; });
+        var a = n("b775");
+
+        function r() {
+            var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { pageNum: 1, pageSize: 999999, search: "" };
+            return Object(a["a"])({ url: "permission/list", params: t });
+        }
+
+        function l(t) {
+            return Object(a["a"])({ url: "permission/del/" + t, method: "delete" });
+        }
+
+        function i(t) {
+            return Object(a["a"])({ url: "permission/save", method: "post", data: t });
+        }
+    }
+}]);

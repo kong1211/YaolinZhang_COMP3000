@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quick.boot.api.modules.system.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.quick.boot.api.modules.system.domain.User">
+        <!--@mbg.generated-->
+        <!--@Table tb_user-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="disabled" jdbcType="BOOLEAN" property="disabled"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, username, `password`, `name`, avatar, phone, disabled
+    </sql>
+    <select id="getPermissions" resultType="java.lang.String">
+        SELECT p.`name`
+        FROM tb_user_role ur
+                 LEFT JOIN tb_role_permission rp ON rp.role_id = ur.role_id
+                 LEFT JOIN tb_permission p ON p.id = rp.permission_id
+        WHERE ur.user_id = #{uid}
+    </select>
+    <select id="getRoles" resultType="java.lang.String">
+        SELECT r.NAME
+        FROM `tb_user_role` ur
+                 LEFT JOIN tb_role r ON r.id = ur.role_id
+        WHERE ur.user_id = #{uid}
+    </select>
+    <select id="getMenusByPid" resultType="com.quick.boot.api.modules.system.domain.Menu">
+        SELECT m.*
+        FROM tb_user_role ur
+                 LEFT JOIN tb_role_menu rm ON rm.role_id = ur.role_id
+                 LEFT JOIN tb_menu m ON m.id = rm.menu_id
+        WHERE ur.user_id = #{uid}
+          AND m.parent = #{pid}
+    </select>
+    <select id="queryByUsername" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+            tb_user
+        WHERE
+            username = #{username}
+    </select>
+</mapper>

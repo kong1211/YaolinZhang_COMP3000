@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: quick-boot
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+mybatis-plus:
+  mapper-locations: classpath:mapper/**.xml
+  type-aliases-package: com.quick.boot.modules.*.domain
+#是否开启日志
+quickboot:
+  log_open: false

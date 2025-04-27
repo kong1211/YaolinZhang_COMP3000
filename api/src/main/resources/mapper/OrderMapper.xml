@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quick.boot.api.modules.hall.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.quick.boot.api.modules.hall.domain.Order">
+    <!--@mbg.generated-->
+    <!--@Table tb_order-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, nick_name, create_time, total_amount, `state`, `comment`
+  </sql>
+</mapper>
